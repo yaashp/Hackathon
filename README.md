@@ -1,49 +1,44 @@
-# DevSight AI — Visual Audit Workspace
+# DevSight AI
 
-A complete, self-contained mirror of [DevSight AI](https://devsight-2wcsgqx7.manus.space).
+DevSight now includes a full-stack local debugging workspace alongside the repository's original standalone visual-audit prototype. The full-stack workspace provides local browser evidence, a source-aware fix review, post-fix verification, and DebugQuest learning missions with progressive hints and XP.
 
-## Overview
+The existing standalone prototype remains available from the repository root as `index.html`, `styles.css`, and `app.js`.
 
-DevSight AI is an interactive prototype demonstrating an end-to-end visual audit workspace:
-- **01 / Browser Evidence**: Simulated mobile (390 × 844) and desktop (1440 × 900) views showing responsive layout issues, plus synthetic browser console & DOM inspection signals.
-- **02 / Audit Signals & Perspectives**: Multi-angle analysis (Security Reviewer, Code Quality & Performance, Socratic Mentor, Visual QA Reviewer).
-- **03 / Review Queue & Findings**: Detailed diagnostic breakdown (such as mobile card overflow and missing accessible labels) with root cause hypotheses and Socratic hints.
-- **04 / Patch Review & Verification Loop**: Interactive diff viewer, one-click simulated patch approval, and before/after verification preview.
-- **Additional Views**: Run History, Project Settings, and Privacy & Limitations.
+## Run the full-stack app on Windows
 
----
+Install Python 3.11, Node.js, and Git. Clone the repository, then open PowerShell in the project folder:
 
-## File Structure
-
-| File | Description |
-|------|-------------|
-| [`index.html`](./index.html) | Standalone, self-contained application entrypoint with clean local paths (opens directly in any browser). |
-| [`index.original.html`](./index.original.html) | Exact byte-for-byte replica of the live website, including original hosting metadata. |
-| [`styles.css`](./styles.css) | Complete stylesheet (~50KB) containing all UI components, layout grids, device frames, syntax diff colors, and theme tokens. |
-| [`app.js`](./app.js) | Full client-side state machine (~20KB) powering the audit simulation, modal dialogs, tab switching, patch staging, and verification flows. |
-| [`safety.js`](./safety.js) | URL and path safety validation routines (`isLoopbackUrl`, `isSafeDisplayPath`). |
-| [`devsight-mark.svg`](./devsight-mark.svg) | Vector brand icon for DevSight AI. |
-| [`favicon.ico`](./favicon.ico) | Application favicon. |
-| [`robots.txt`](./robots.txt) | Robots exclusion rules. |
-| [`sitemap.xml`](./sitemap.xml) | XML sitemap. |
-| [`__manus/pwa/manifest.webmanifest`](./__manus/pwa/manifest.webmanifest) | Web app manifest for standalone display. |
-
----
-
-## How to Run
-
-### Option 1: Direct File Open
-Simply double-click [`index.html`](./index.html) in your file manager to open it directly in any modern browser.
-
-### Option 2: Local HTTP Server
-Using Node.js:
-```bash
-npx serve .
-# or
-npx http-server .
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run.ps1
 ```
-Or with Python:
-```bash
-python -m http.server 8080
+
+Open http://127.0.0.1:8000. PowerShell's execution-policy bypass above applies only to the invoked process; it does not change the machine policy.
+
+In a second PowerShell window, start the seeded Next.js sample:
+
+```powershell
+cd sample-next
+npm install
+npm run dev
 ```
-Then navigate to `http://localhost:8080`.
+
+Then click **Run audit** in DevSight. The sample has three seeded runtime errors and is labeled as a practice project. To inspect another supported app, enter its local folder and localhost URL in DevSight.
+
+## Enable Gemma
+
+Copy `.env.example` to `.env`, add your own Google AI Studio key, and keep `.env` private. Never commit API keys.
+
+## Original standalone prototype
+
+To run the original static prototype instead, serve the repository root with:
+
+```powershell
+py -m http.server 8080
+```
+
+Open http://127.0.0.1:8080.
+
+## Privacy and scope
+
+The full-stack development server binds to loopback by default. Browser screenshots and source excerpts stay local unless model analysis is enabled. Review each suggested patch; DevSight makes a backup before writing and only describes a fix as verified after rerunning its check.

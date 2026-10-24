@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4f7ff">
+  <title>Fair-Drop Debugger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css?v=6">
+</head>
+<body data-theme="beginner">
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Fair-Drop home"><span class="brand-mark">F<span>✳</span></span><span><b>fair-drop</b><small>DEBUGGER</small></span></a>
+    <div class="top-center"><span class="live-dot"></span><span id="connectionLabel">Local sample connected</span><a id="sampleLink" href="http://127.0.0.1:3000" target="_blank" rel="noreferrer">Open seeded app ↗</a></div>
+    <div class="top-actions">
+      <div class="theme-switch" role="group" aria-label="Choose interface theme"><button class="theme-button active" data-theme-choice="beginner">☀ Beginner</button><button class="theme-button" data-theme-choice="pro">◐ Pro</button></div>
+      <div class="xp-chip"><span>✦</span><strong id="xpValue">0 XP</strong><small id="levelValue">Level 1</small></div>
+    </div>
+  </header>
+
+  <main id="top" class="app-shell">
+    <section class="pipeline-card" aria-label="Debugging progress">
+      <div class="pipeline-title"><div><span class="eyebrow">YOUR DEBUG JOURNEY</span><h1>Let’s fix this together<span class="title-spark">✦</span></h1></div><span class="seed-counter"><b id="fixedCount">0</b> of <b id="totalCount">3</b> fixed</span></div>
+      <ol id="stepper" class="stepper">
+        <li class="step complete" data-step="detect"><span class="step-number">1</span><span class="step-name">Detect Error</span></li>
+        <li class="step complete" data-step="analyze"><span class="step-number">2</span><span class="step-name">Analyze</span></li>
+        <li class="step complete" data-step="cause"><span class="step-number">3</span><span class="step-name">Find Cause</span></li>
+        <li class="step active" data-step="fix"><span class="step-number">4</span><span class="step-name">Generate Fix</span></li>
+        <li class="step" data-step="apply"><span class="step-number">5</span><span class="step-name">Apply Fix</span></li>
+      </ol>
+    </section>
+
+    <section class="overview-grid">
+      <aside class="error-card panel">
+        <div class="card-kicker"><span class="pulse-error"></span><span id="errorCounter">ERROR 1 OF 3</span><span id="difficultyBadge" class="difficulty">EASY</span></div>
+        <div class="error-heading"><span class="error-symbol">!</span><div><span class="eyebrow">RUNTIME ERROR</span><h2 id="issueTitle">Loading seeded errors…</h2></div></div>
+        <div id="errorMessage" class="error-message">Reading the sample project…</div>
+        <dl class="error-facts"><div><dt>File</dt><dd id="issueFile">—</dd></div><div><dt>Line</dt><dd id="issueLine">—</dd></div><div><dt>Cause</dt><dd id="issueCause">—</dd></div></dl>
+        <div class="error-nav"><button id="prevError" class="nav-button" aria-label="Previous error">←</button><button id="errorIndex" class="index-pill">Error 1 of 3</button><button id="nextError" class="nav-button" aria-label="Next error">→</button><button id="nextErrorLabel" class="next-label">Next error <span>›</span></button></div>
+        <div id="mascotBubble" class="mascot-bubble"><span id="mascot" class="mascot" aria-hidden="true">🐱</span><p id="mascotText">Oops, I found a bug. Let’s figure out why!</p></div>
+      </aside>
+
+      <section class="flow-card panel">
+        <div class="flow-head"><div><span class="eyebrow">FOLLOW THE DATA</span><h2>How this error happens</h2></div><div class="flow-tools"><button id="flowZoomOut" aria-label="Zoom out">−</button><button id="flowZoomIn" aria-label="Zoom in">+</button><button id="flowReset" aria-label="Reset graph zoom">Reset</button></div></div>
+        <div id="flowViewport" class="flow-viewport" aria-label="Interactive error flow graph. Drag to pan and use the wheel to zoom.">
+          <div id="flowCanvas" class="flow-canvas">
+            <svg class="flow-lines" viewBox="0 0 720 230" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="arrow" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8" fill="none" stroke="currentColor" stroke-width="1.6"/></marker></defs><path d="M164 114 H248"/><path d="M380 114 H455"/><path d="M567 114 H638"/></svg>
+            <button class="flow-node file-node" data-select="file"><small>FILE</small><b id="flowFile">app/events/page.tsx</b><span>↗</span></button>
+            <button class="flow-node variable-node" data-select="variable"><small>DATA</small><b id="flowVariable">events</b><span>undefined</span></button>
+            <button class="flow-node call-node" data-select="call"><small>FAILING CALL</small><b id="flowCall">events.map</b><span class="node-alert">!</span></button>
+            <button class="flow-node fix-node" data-select="fix"><small>SAFE FIX</small><b id="flowFix">events ?? []</b><span>ready to review</span></button>
+          </div>
+        </div>
+        <div class="flow-caption"><span class="flow-legend"><i class="legend-red"></i> failing value</span><span class="flow-legend"><i class="legend-green"></i> safe fix</span><span>Scroll to zoom · drag to pan · click a node to inspect</span></div>
+      </section>
+    </section>
+
+    <section class="workbench panel" aria-label="Code review workbench">
+      <aside class="file-tree">
+        <div class="tree-head"><span>PROJECT</span><button id="collapseTree" aria-label="Collapse file tree">⌘</button></div>
+        <div class="project-root"><span class="folder-caret">⌄</span><span class="folder-icon">▰</span><b>sample-next</b><span id="rootBadge" class="tree-badge">3</span></div>
+        <div id="fileTree" class="tree-files"></div>
+        <div class="tree-footer"><span class="live-dot"></span> local files only</div>
+      </aside>
+
+      <div class="editor-area">
+        <div class="editor-toolbar"><div class="breadcrumb"><span>sample-next</span><i>/</i><b id="activePath">app/events/page.tsx</b></div><div class="toolbar-actions"><button id="explainButton" class="explain-button">✦ Explain more</button><button id="flowFocus" class="icon-action" title="Focus current flow">⌁</button></div></div>
+        <div class="editor-subbar"><span class="file-tab"><span class="react-icon">✿</span><b id="tabName">page.tsx</b><span class="tab-error-dot"></span></span><div class="editor-controls"><span id="editorPosition">Ln 1, Col 1</span><span id="keyHints">J / K to switch errors</span><button id="openQuickFix" class="quickfix-button">✨ Quick Fix</button></div></div>
+        <div class="code-split">
+          <section class="code-pane original-pane"><div class="pane-title"><span class="pane-dot red"></span> ORIGINAL <span class="pane-path" id="originalName">page.tsx</span></div><div class="code-scroll" id="originalScroll"><div id="originalCode" class="code-lines" aria-label="Original source code"></div><div id="whyTooltip" class="why-tooltip"><span class="tooltip-bulb">✦</span><div><b>Why this error?</b><p id="whyText">The value is missing, so this method call crashes.</p><div class="tooltip-fix"><small>QUICK FIX</small><code id="tooltipFix">Use a safe fallback.</code></div></div></div></div></section>
+          <section class="code-pane fixed-pane"><div class="pane-title"><span class="pane-dot green"></span> PROPOSED FIX <span class="pane-path" id="fixedName">page.tsx</span><span class="review-tag">REVIEW BEFORE APPLY</span></div><div class="code-scroll" id="fixedScroll"><div id="fixedCode" class="code-lines" aria-label="Proposed fixed source code"></div></div><div class="fix-actions"><button id="rejectFix" class="secondary-action">Reject</button><button id="undoFix" class="secondary-action hidden">↶ Undo</button><button id="applyFix" class="apply-action"><span>Apply fix</span><kbd>Enter</kbd><span>→</span></button></div></section>
+        </div>
+        <div id="explainPanel" class="explain-panel hidden"><span class="explain-icon">💡</span><div><b>In plain language</b><p id="explainText"></p></div><button id="closeExplain" aria-label="Close explanation">×</button></div>
+        <div id="fixedCard" class="fixed-card hidden"><span class="fixed-sparkle">✦</span><span class="fixed-check">✓</span><div><b id="fixedHeading">Error fixed!</b><p id="verificationText">The changed source passed its verification check.</p></div><button id="verifyAgain" class="quiz-button hidden">Verify again ↻</button><button id="quizButton" class="quiz-button">Earn bonus XP <span>→</span></button></div>
+      </div>
+    </section>
+    <div class="bottom-note"><span>LOCAL PREVIEW</span><span>Review every suggested change · Fixes are backed up before applying</span><span id="streakBadge">🔥 0 day streak</span></div>
+  </main>
+
+  <dialog id="quizDialog" class="quiz-dialog"><form method="dialog"><div class="quiz-top"><span class="quiz-mascot">🐱</span><button class="close-dialog" aria-label="Close quiz">×</button></div><span class="eyebrow">BONUS XP · QUICK CHECK</span><h2 id="quizQuestion">Why did this error happen?</h2><div id="quizAnswers" class="quiz-answers"></div><p id="quizFeedback" class="quiz-feedback" aria-live="polite"></p></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/static/app.js?v=5"></script>
+</body>
+</html>

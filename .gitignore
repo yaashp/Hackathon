@@ -1,0 +1,47 @@
+# Secrets and local environment files
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.pem
+*.key
+credentials*.json
+service-account*.json
+
+# Python environments and caches
+.venv/
+.venv311/
+**/.venv/
+**/venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+
+# Node dependencies and generated output
+**/node_modules/
+**/.next/
+**/out/
+**/dist/
+**/coverage/
+**/playwright-report/
+**/test-results/
+sample-next/next-env.d.ts
+
+# Local runtime state and generated captures
+work/
+.devsight/backups/
+**/.devsight/backups/
+
+# Nested repository metadata in included reference sources
+**/.git/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+sample-next/AGENTS.md
+upstream/
