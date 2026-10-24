@@ -1,0 +1,34 @@
+.progress-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0 9px;padding:8px 0;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)}
+.progress-stats span{display:grid;gap:2px;text-align:center}
+.progress-stats b{font:700 13px var(--mono);color:var(--mint-telemetry)}
+.progress-stats small{font-size:8px;color:var(--text-silver)}
+.mission-meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:10px 15px 0}
+.mission-meta span{font:8px var(--mono);color:var(--text-silver);border:1px solid var(--line-subtle);border-radius:20px;padding:5px 8px}
+.mission-meta .mission-difficulty{color:var(--amber-telemetry);border-color:rgba(255,170,0,.25);background:rgba(255,170,0,.06)}
+.mission-meta #missionStatus{margin-left:auto;color:var(--blue-telemetry)}
+.quest-box{margin:12px 15px;padding:13px;border:1px solid rgba(0,180,216,.25);border-radius:9px;background:linear-gradient(140deg,rgba(0,180,216,.055),rgba(14,14,26,.6))}
+.quest-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.quest-heading small{font:8px var(--mono);letter-spacing:.1em;color:var(--blue-telemetry)}
+.quest-heading h3{margin:5px 0 0;font-size:12px;color:var(--text-white)}
+.quest-step{font:8px var(--mono);color:var(--text-silver)}
+.quest-objective{margin:8px 0;color:var(--text-silver);font-size:10px;line-height:1.55}
+.diagnosis-options{display:grid;gap:6px}
+.diagnosis-options button{padding:9px 10px;text-align:left;border:1px solid var(--line-subtle);border-radius:6px;background:rgba(0,0,22,.55);color:#d9dfef;font-size:9px;line-height:1.5;cursor:pointer;transition:border-color .18s,background .18s,transform .18s}
+.diagnosis-options button:hover:not(:disabled),.diagnosis-options button.chosen{border-color:var(--blue-telemetry);background:rgba(0,180,216,.09);transform:translateY(-1px)}
+.diagnosis-options button.correct{border-color:var(--mint-telemetry);background:rgba(0,208,132,.08)}
+.diagnosis-options button.incorrect{border-color:var(--red-scuderia);background:rgba(228,3,46,.09)}
+.diagnosis-options button:disabled{cursor:default}
+.quest-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.quest-actions .secondary-button{min-height:31px;padding:0 10px;font-size:9px}
+.quest-actions .text-button{margin-left:0}
+.hint-reveal{margin-top:9px;padding:9px 10px;border-left:2px solid var(--amber-telemetry);background:rgba(255,170,0,.055);color:#e8d9b4;font-size:9px;line-height:1.55;animation:quest-in .25s ease-out}
+.diagnosis-feedback{min-height:14px;margin:7px 0 0;color:var(--text-silver);font-size:9px}
+.cause-box{animation:quest-in .3s ease-out}
+.lesson-recap{margin-top:7px!important;color:var(--text-silver)!important}
+@keyframes quest-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+body[data-theme=beginner] .quest-box{background:#f6f9ff;border-color:#cbd8f0}
+body[data-theme=beginner] .quest-heading h3{color:#26334b}
+body[data-theme=beginner] .diagnosis-options button{background:#fff;color:#35435d;border-color:#dce4f0}
+body[data-theme=beginner] .hint-reveal{color:#5d4b24;background:#fff8e4}
+@media(max-width:680px){.mission-meta #missionStatus{margin-left:0}.quest-box{margin:10px}.quest-actions{gap:5px}}
+@media(prefers-reduced-motion:reduce){.hint-reveal,.cause-box{animation:none}}

@@ -1,0 +1,47 @@
+/* DevSight workspace palette bridge.
+   The original design system is loaded unchanged before the workspace layout.
+   These rules map its navy, Scuderia red, and telemetry mint tokens onto the
+   new workspace components without editing the supplied stylesheet. */
+:root {
+  --bg: var(--bg-deep);
+  --panel: var(--bg-card-solid);
+  --panel2: #111126;
+  --line: var(--line-subtle);
+  --muted: var(--text-silver);
+  --red: var(--red-scuderia);
+  --green: var(--mint-telemetry);
+  --blue: var(--blue-telemetry);
+}
+
+html, body { background: var(--bg-deep); color: var(--text-white); }
+body { background-image: radial-gradient(ellipse at 50% -35%, #10103a 0, transparent 58%); }
+.topbar { background: rgba(0, 0, 22, .92); border-color: var(--line-subtle); }
+.gamification-card,
+.project-card,
+.journey-card,
+.panel,
+.success-card {
+  background: linear-gradient(145deg, rgba(14, 14, 34, .96), rgba(5, 5, 20, .98));
+  border-color: rgba(108, 127, 190, .2);
+}
+.project-fields input,
+.source-picker input,
+.code-box,
+.code-context,
+.viewport-tabs,
+.theme-switch {
+  background-color: #07071d;
+  border-color: rgba(108, 127, 190, .24);
+}
+.secondary-button { background: #11112c; border-color: rgba(108, 127, 190, .28); }
+.secondary-button:hover { background: #191941; }
+.primary-button { background: var(--red-scuderia); box-shadow: 0 5px 18px var(--red-glow); }
+.welcome-row h1 span { color: var(--red-hover); }
+.live-dot, .stepper li.done i { background-color: var(--mint-telemetry); }
+.stepper li.active i { border-color: var(--red-scuderia); background: var(--red-scuderia); box-shadow: 0 0 0 5px var(--red-glow), 0 0 20px var(--red-glow); }
+.key-status.ready, .project-hint > span { color: var(--mint-telemetry); }
+.stepper:before, .panel-head { border-color: var(--line-subtle); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
