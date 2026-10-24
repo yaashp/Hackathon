@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f6f8" />
+    <meta name="description" content="DevSight AI prototype — inspect a visual issue, understand its cause, review a fix, and verify the result." />
+    <title>DevSight AI — Visual audit workspace</title>
+    <link rel="icon" href="/devsight-mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/safety.js" defer></script>
+    <script src="/app.js" defer></script>
+  <meta property="og:type" content="website">
+		<meta property="og:url" content="https://devsight-2wcsgqx7.manus.space/">
+		<meta property="og:title" content="DevSight AI — Visual audit workspace">
+		<meta property="og:description" content="DevSight AI prototype — inspect a visual issue, understand its cause, review a fix, and verify the result.">
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:title" content="DevSight AI — Visual audit workspace">
+		<meta name="twitter:description" content="DevSight AI prototype — inspect a visual issue, understand its cause, review a fix, and verify the result."><link rel="canonical" href="https://devsight-2wcsgqx7.manus.space/" /><link rel="manifest" href="/__manus/pwa/manifest.webmanifest" crossorigin="use-credentials" /></head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#overview" aria-label="DevSight AI overview">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="brand-name">devsight<span>AI</span></span>
+        </a>
+
+        <div class="workspace-switcher">
+          <span class="workspace-icon" aria-hidden="true">LP</span>
+          <span class="workspace-copy"><small>WORKSPACE</small><strong id="sidebar-project-name">Landing page</strong></span>
+          <span class="chevron" aria-hidden="true">⌄</span>
+        </div>
+
+        <div class="nav-label">WORKSPACE</div>
+        <nav class="primary-nav">
+          <button class="nav-item is-active" type="button" data-view="overview"><span class="nav-glyph" aria-hidden="true">◫</span><span>Audit overview</span></button>
+          <button class="nav-item" type="button" data-view="history"><span class="nav-glyph" aria-hidden="true">◷</span><span>Run history</span><span class="nav-count">3</span></button>
+          <button class="nav-item" type="button" data-view="project"><span class="nav-glyph" aria-hidden="true">⌘</span><span>Project settings</span></button>
+        </nav>
+
+        <div class="nav-label nav-label-spaced">LEARN &amp; SAFETY</div>
+        <nav class="primary-nav">
+          <button class="nav-item" type="button" data-view="privacy"><span class="nav-glyph" aria-hidden="true">◇</span><span>Privacy &amp; limits</span></button>
+        </nav>
+
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-demo-card">
+          <div class="demo-card-heading"><span class="demo-dot"></span> Synthetic demo</div>
+          <p>Nothing is sent to a model or written to your files.</p>
+          <button type="button" class="text-link" data-open-privacy>How this works <span aria-hidden="true">↗</span></button>
+        </div>
+        <div class="profile-row">
+          <div class="avatar">DS</div>
+          <div class="profile-copy"><strong>Demo workspace</strong><small>Local prototype</small></div>
+          <span class="profile-menu" aria-hidden="true">•••</span>
+        </div>
+      </aside>
+
+      <main class="main-area">
+        <header class="topbar">
+          <div class="breadcrumbs"><span>Workspace</span><span class="crumb-divider">/</span><strong id="crumb-current">Audit overview</strong></div>
+          <div class="topbar-actions">
+            <span class="connection-pill"><span class="connection-dot"></span>Demo mode</span>
+            <button class="icon-button help-button" type="button" data-open-privacy aria-label="About demo mode">?</button>
+          </div>
+        </header>
+
+        <section class="view-page is-visible" id="overview-view" aria-labelledby="page-title">
+          <div class="page-intro">
+            <div>
+              <div class="eyebrow"><span class="eyebrow-mark">✳</span> VISUAL AUDIT WORKSPACE <span class="eyebrow-divider">·</span> SYNTHETIC DATA</div>
+              <h1 id="page-title">See the problem.<br class="mobile-break" /> Understand the fix.</h1>
+              <p class="intro-copy">A guided review of your UI, from first signal to verified fix.</p>
+            </div>
+            <div class="intro-actions">
+              <button class="button button-quiet" type="button" id="configure-project"><span aria-hidden="true">⌘</span> Configure project</button>
+              <button class="button button-primary" type="button" id="run-audit"><span class="run-icon" aria-hidden="true">▶</span><span id="run-audit-label">Run audit</span></button>
+              <div class="run-menu-wrap">
+                <button class="icon-button run-menu-button" id="run-menu-toggle" type="button" aria-label="More audit demo states" aria-expanded="false">•••</button>
+                <div class="run-menu" id="run-menu" hidden>
+                  <button type="button" data-run-mode="partial">Demo a partial result</button>
+                  <button type="button" data-run-mode="error">Demo an audit error</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-strip">
+            <div class="project-strip-main">
+              <span class="project-file-icon" aria-hidden="true">&lt;/&gt;</span>
+              <div class="project-meta"><div class="project-name-line"><strong id="project-name">Landing page</strong><span class="stack-tag">HTML · CSS · JS</span></div><div class="project-path" id="project-path">~/Projects/landing-page <span class="path-separator">·</span> <span class="local-url" id="local-url">http://localhost:5173</span></div></div>
+            </div>
+            <div class="project-strip-state"><span class="state-check" aria-hidden="true">✓</span><span>Demo project ready</span><span class="state-divider"></span><span class="sample-tag">SAMPLE PROJECT</span></div>
+          </div>
+
+          <div class="audit-feedback" id="audit-feedback" role="status" aria-live="polite" hidden></div>
+          <div class="audit-progress" id="audit-progress" aria-live="polite" hidden>
+            <div class="progress-orbit"><span></span></div>
+            <div class="progress-copy"><strong id="progress-title">Preparing demo audit…</strong><span id="progress-detail">Reading the sample page and evidence bundle</span></div>
+            <div class="progress-track"><span id="progress-fill"></span></div>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="panel evidence-panel" aria-labelledby="evidence-heading">
+              <div class="panel-heading">
+                <div><div class="section-kicker">01 / EVIDENCE</div><h2 id="evidence-heading">Browser evidence</h2></div>
+                <span class="simulated-badge"><span class="badge-pulse"></span>SIMULATED</span>
+              </div>
+              <div class="evidence-tabs" role="tablist" aria-label="Evidence type">
+                <button type="button" class="evidence-tab is-active" data-evidence="mobile" role="tab" aria-selected="true">Mobile <span>390 × 844</span></button>
+                <button type="button" class="evidence-tab" data-evidence="desktop" role="tab" aria-selected="false">Desktop <span>1440 × 900</span></button>
+                <button type="button" class="evidence-tab" data-evidence="signals" role="tab" aria-selected="false">Console &amp; DOM <span class="signal-count">2</span></button>
+              </div>
+              <div class="capture-area" id="capture-area">
+                <div class="capture-toolbar"><span class="capture-origin"><span class="lock-glyph" aria-hidden="true">⌑</span><span id="capture-url">localhost:5173</span></span><span class="capture-toolbar-meta"><span class="capture-viewport" id="capture-viewport">390 × 844</span><span class="capture-sim-label">RECONSTRUCTED PREVIEW</span></span></div>
+                <div class="capture-stage">
+                  <div class="capture-frame is-mobile" id="capture-frame">
+                    <div class="device-notch" aria-hidden="true"><span></span></div>
+                    <div class="mock-browser-bar"><span class="mock-brand-mark"></span><span>northstar<span class="mock-brand-dot">.</span></span><span class="mock-menu-icon" aria-hidden="true"><i></i><i></i></span></div>
+                    <div class="browser-viewport">
+                      <div class="mock-site">
+                        <div class="mock-site-eyebrow"><span class="mock-spark" aria-hidden="true">✳</span> THE FIELD NOTES</div>
+                        <h3>Make room<br />for better ideas.</h3>
+                        <p class="mock-description">A little inspiration for the things you’re building next.</p>
+                        <div class="mock-card-wrap"><article class="mock-card" id="mock-card"><div class="mock-card-art"><span class="art-orbit orbit-one"></span><span class="art-orbit orbit-two"></span><span class="art-sun"></span><span class="art-horizon"></span><span class="art-label">FIELD NOTE 08</span></div><div class="mock-card-copy"><div class="mock-card-category">DESIGN · 6 MIN READ</div><h4>Start with the shape of the question.</h4><p>Good work begins before the first answer. Here’s a practice for finding the edges.</p><span class="mock-read-link">Read the note <b aria-hidden="true">↗</b></span></div></article></div>
+                        <div class="mock-bottom"><span>Designed for the curious.</span><span class="mock-bottom-dot"></span></div>
+                      </div>
+                    </div>
+                    <div class="overflow-indicator" id="overflow-indicator"><span>!</span> 130px beyond viewport</div>
+                    <div class="device-home" aria-hidden="true"></div>
+                  </div>
+                  <div class="desktop-caption" id="desktop-caption" hidden><span class="desktop-caption-dot"></span> Layout fits at desktop width</div>
+                </div>
+                <div class="capture-footer"><span><span class="capture-note-icon">i</span> This is a CSS-rendered demo, not a captured screenshot.</span><span id="capture-state-label">OVERFLOW DETECTED</span></div>
+              </div>
+              <div class="source-evidence"><div class="source-file-label"><span class="file-mini-icon">CSS</span><span>sample-site / styles.css</span><span class="line-ref">line 42</span></div><code id="source-snippet"><span class="code-selector">.feature-card</span> { <span class="code-property">width</span>: <span class="code-value">520px</span>; }</code><span class="source-status" id="source-status"><span class="source-status-dot"></span> Likely cause</span></div>
+            </section>
+
+            <section class="panel signals-panel" aria-labelledby="signals-heading">
+              <div class="panel-heading compact-heading"><div><div class="section-kicker">02 / SIGNALS</div><h2 id="signals-heading">Audit signals</h2></div><button class="tiny-link" type="button" data-evidence-shortcut="signals">View all <span aria-hidden="true">→</span></button></div>
+              <div class="signal-summary"><span class="signal-summary-mark">⌁</span><div><strong id="signal-summary-title">3 evidence sources</strong><span>Bundled synthetic sample data</span></div></div>
+              <div class="signal-row"><span class="signal-icon signal-icon-warn" aria-hidden="true">!</span><div class="signal-copy"><strong>Console &amp; page errors</strong><span id="console-summary">1 warning · 0 page errors</span></div><span class="signal-status status-warn">1</span></div>
+              <div class="signal-row"><span class="signal-icon signal-icon-blue" aria-hidden="true">⌗</span><div class="signal-copy"><strong>DOM &amp; accessibility</strong><span>6 elements · 1 review note</span></div><span class="signal-status status-blue">1</span></div>
+              <div class="signal-row"><span class="signal-icon signal-icon-green" aria-hidden="true">▧</span><div class="signal-copy"><strong>Viewport evidence</strong><span>Desktop + mobile variants</span></div><span class="signal-status status-green">2</span></div>
+              <div class="signals-divider"></div>
+              <div class="review-perspectives"><div class="perspective-heading"><span>REVIEW PERSPECTIVES</span><span class="same-run-tag">ONE DEMO RUN</span></div><div class="perspective-chip-row"><span class="perspective-chip"><i class="perspective-icon security-icon">◇</i> Security Reviewer</span><span class="perspective-chip"><i class="perspective-icon quality-icon">⌘</i> Code Quality &amp; Performance</span><span class="perspective-chip"><i class="perspective-icon mentor-icon">↗</i> Socratic Mentor</span><span class="perspective-chip"><i class="perspective-icon visual-icon">▧</i> Visual QA Reviewer</span></div><p class="perspective-note">Viewpoints within one simulated review—not separate agents.</p></div>
+            </section>
+
+            <section class="panel findings-panel" aria-labelledby="findings-heading">
+              <div class="panel-heading compact-heading"><div><div class="section-kicker">03 / FINDINGS</div><h2 id="findings-heading">Review queue <span class="finding-total" id="finding-total">02</span></h2></div><button class="filter-button" type="button" id="finding-filter" aria-label="Finding filter">All findings <span aria-hidden="true">⌄</span></button></div>
+              <div class="finding-list" id="finding-list">
+                <button class="finding-item is-selected" type="button" data-finding="overflow" aria-current="true"><span class="finding-severity severity-medium"><i></i>MEDIUM</span><span class="finding-item-title">Card overflows on mobile</span><span class="finding-item-meta"><span>Visual</span><span>·</span><span>styles.css:42</span><span class="finding-chevron" aria-hidden="true">›</span></span></button>
+                <button class="finding-item" type="button" data-finding="label" aria-current="false"><span class="finding-severity severity-low"><i></i>LOW</span><span class="finding-item-title">Menu control needs a label</span><span class="finding-item-meta"><span>Accessibility</span><span>·</span><span>navigation.html</span><span class="finding-chevron" aria-hidden="true">›</span></span></button>
+              </div>
+              <div class="finding-footnote"><span class="info-ring">i</span> Estimates from synthetic evidence; review before acting.</div>
+            </section>
+
+            <section class="panel finding-detail-panel" aria-labelledby="detail-title">
+              <div class="detail-topline"><div><div class="section-kicker">FINDING DETAIL <span class="detail-id">· DS-001</span></div><h2 id="detail-title">Card overflows on mobile</h2></div><span class="confidence-pill">88% confidence <span class="confidence-dot"></span></span></div>
+              <div class="finding-detail-content" id="overflow-detail">
+                <div class="detail-tags"><span class="detail-tag tag-visual"><span aria-hidden="true">▧</span> Visual</span><span class="detail-tag">Medium severity</span><span class="detail-tag tag-open" id="finding-status-tag"><span class="status-dot"></span> Needs review</span></div>
+                <div class="detail-observation"><span class="observation-bar"></span><p><strong>Observed:</strong> In the mobile preview, the feature card extends beyond the visible page width. Its right edge is clipped in the 390px viewport.</p></div>
+                <div class="detail-grid"><div class="detail-block"><span class="detail-label">LIKELY ROOT CAUSE</span><p>A fixed <code>width: 520px</code> keeps the card wider than the available content area. This is a hypothesis based on the synthetic CSS snippet.</p></div><div class="detail-block"><span class="detail-label">REPRODUCE</span><p>Switch to the 390 × 844 mobile evidence tab and inspect the feature card’s right edge.</p></div></div>
+                <div class="hint-card"><div class="hint-header"><span class="hint-bulb" aria-hidden="true">✳</span><span class="detail-label">SOCRATIC HINT</span><span class="hint-first-tag">HINT FIRST</span></div><p>Which width rule stays the same when the viewport gets narrower?</p></div>
+                <div class="answer-reveal" id="answer-reveal" hidden><div class="detail-block answer-block"><span class="detail-label">RECOMMENDED FIX</span><p>Let the card shrink with its container, then cap it at its intended desktop width. For example, use <code>width: 100%</code> with <code>max-width: 520px</code>.</p></div><div class="viewpoint-block"><span class="detail-label">CONTEXTUAL VIEWPOINTS · ONE STRUCTURED REVIEW</span><div class="contextual-perspectives"><article class="contextual-perspective"><strong>Security Reviewer</strong><p>This layout-only evidence does not support a security conclusion; no security checks ran.</p></article><article class="contextual-perspective"><strong>Code Quality &amp; Performance Reviewer</strong><p>The fixed width is a specific responsive maintainability concern. No performance measurement was made.</p></article><article class="contextual-perspective"><strong>Socratic Mentor</strong><p>Use the hint above to identify which width rule fails to adapt as the viewport narrows.</p></article><article class="contextual-perspective"><strong>Visual QA Reviewer</strong><p>The reconstructed mobile card clips at 390px; the desktop sample fits. This is synthetic visual evidence.</p></article></div><p class="viewpoint-disclaimer">Analytical sections of one simulated review—not independent agents.</p></div><button class="button button-outline patch-review-button" type="button" id="open-patch"><span aria-hidden="true">⌁</span> Review proposed patch <span class="button-arrow" aria-hidden="true">→</span></button></div>
+                <button class="reveal-answer-button" id="reveal-answer" type="button">Reveal explanation &amp; suggested fix <span aria-hidden="true">↓</span></button>
+              </div>
+              <div class="finding-detail-content secondary-detail" id="label-detail" hidden>
+                <div class="detail-tags"><span class="detail-tag tag-accessibility">Accessibility</span><span class="detail-tag">Low severity</span><span class="detail-tag">Needs review</span></div>
+                <div class="detail-observation"><span class="observation-bar observation-bar-blue"></span><p><strong>Observed:</strong> The sample navigation menu button has no accessible name in the bundled DOM excerpt.</p></div>
+                <div class="detail-block"><span class="detail-label">LIKELY ROOT CAUSE</span><p>The icon-only control does not include visible text or an <code>aria-label</code> in this synthetic sample.</p></div>
+                <div class="hint-card"><div class="hint-header"><span class="hint-bulb" aria-hidden="true">✳</span><span class="detail-label">SOCRATIC HINT</span><span class="hint-first-tag">HINT FIRST</span></div><p>If a screen reader encounters this icon-only button, what words would it announce?</p></div>
+                <div class="answer-reveal" id="label-answer" hidden><div class="detail-block answer-block"><span class="detail-label">RECOMMENDED FIX</span><p>Add an accessible name, for example <code>aria-label="Open navigation menu"</code>.</p></div><div class="viewpoint-block"><span class="detail-label">LIMITATION</span><p>This issue is represented in synthetic DOM evidence only; the prototype does not inspect a real page.</p></div></div>
+                <button class="reveal-answer-button" id="reveal-label-answer" type="button">Reveal explanation &amp; suggested fix <span aria-hidden="true">↓</span></button>
+              </div>
+            </section>
+          </div>
+
+          <section class="verification-panel panel" id="verification-panel" aria-labelledby="verification-heading" hidden>
+            <div class="verification-intro"><div><div class="section-kicker">04 / VERIFY</div><h2 id="verification-heading">Close the loop</h2><p id="verification-copy">The patch is approved in the demo. Rerun the sample check to compare the mobile evidence.</p></div><button class="button button-primary" type="button" id="verify-fix"><span class="run-icon" aria-hidden="true">↻</span><span id="verify-label">Re-run verification</span></button></div>
+            <div class="before-after" id="before-after">
+              <div class="compare-card"><div class="compare-heading"><span><i class="compare-dot dot-before"></i>BEFORE</span><span>390 × 844 · demo</span></div><div class="compare-viewport compare-overflow"><div class="compare-card-art"></div><div class="compare-lines"><b></b><i></i><i></i></div><span class="compare-overflow-mark">CLIPPED</span></div><p>Fixed-width card extends past the viewport.</p></div>
+              <div class="compare-arrow" aria-hidden="true">→</div>
+              <div class="compare-card"><div class="compare-heading"><span><i class="compare-dot dot-after"></i>AFTER</span><span id="after-state">Pending rerun</span></div><div id="compare-after" class="compare-viewport compare-after"><div class="compare-card-art"></div><div class="compare-lines"><b></b><i></i><i></i></div><span class="compare-fit-mark" id="compare-fit-mark">AWAITING CHECK</span></div><p id="after-caption">No verification has run yet.</p></div>
+            </div>
+            <div class="verification-result" id="verification-result" role="status" hidden><span class="verification-check">✓</span><div><strong>Issue appears resolved in the demo.</strong><span>Mobile card fits the sample viewport. No real browser check or file edit occurred.</span></div><span class="verification-sim-tag">SIMULATED RESULT</span></div>
+          </section>
+
+          <footer class="page-footer"><span><span class="footer-shield">◇</span> Synthetic demo only. No project files are read or changed.</span><button type="button" class="footer-link" data-open-privacy>Privacy &amp; limitations <span aria-hidden="true">↗</span></button></footer>
+        </section>
+
+        <section class="view-page alternate-view" id="history-view" aria-labelledby="history-title" hidden>
+          <div class="page-intro alternate-intro"><div><div class="eyebrow">WORKSPACE / SAMPLE HISTORY</div><h1 id="history-title">Run history</h1><p class="intro-copy">A small timeline of the seeded demo scenario.</p></div><button class="button button-primary" type="button" data-view-jump="overview">Back to audit <span aria-hidden="true">→</span></button></div>
+          <div class="panel history-panel"><div class="history-panel-heading"><div><div class="section-kicker">SYNTHETIC RECORDS</div><h2>Recent demo activity</h2></div><span class="simulated-badge">DEMO DATA</span></div><div class="history-row"><span class="history-icon history-icon-green">✓</span><div><strong>Responsive fix verified</strong><span>Sample landing page · Mobile viewport</span></div><span class="history-result history-result-pending" id="history-result">Not run</span><time>Just now</time></div><div class="history-row"><span class="history-icon history-icon-amber">!</span><div><strong>Mobile overflow detected</strong><span>Sample landing page · 2 findings in the seeded bundle</span></div><span class="history-result">Synthetic</span><time>Demo sample</time></div><div class="history-row"><span class="history-icon history-icon-blue">⌁</span><div><strong>Project connected</strong><span>Local URL is shown for context only; no connection is made.</span></div><span class="history-result">Setup</span><time>Demo sample</time></div></div>
+          <div class="history-notice"><span class="info-ring">i</span> History entries are illustrative and stored only in this page session.</div>
+        </section>
+
+        <section class="view-page alternate-view" id="project-view" aria-labelledby="project-settings-title" hidden>
+          <div class="page-intro alternate-intro"><div><div class="eyebrow">WORKSPACE / PROJECT</div><h1 id="project-settings-title">Project settings</h1><p class="intro-copy">Edit the local-project details displayed in this prototype.</p></div><button class="button button-outline" type="button" id="settings-configure">Edit project details <span aria-hidden="true">→</span></button></div>
+          <div class="settings-grid"><div class="panel settings-card"><div class="section-kicker">SAMPLE PROJECT</div><h2 id="settings-project-name">Landing page</h2><div class="settings-value"><span>Project directory</span><code id="settings-project-path">~/Projects/landing-page</code></div><div class="settings-value"><span>Local development URL</span><code id="settings-local-url">http://localhost:5173</code></div><div class="settings-value"><span>Detected stack</span><code>HTML · CSS · JavaScript</code></div><div class="safe-note"><span class="safe-note-icon">◇</span><p>Only localhost and loopback URLs are accepted in the demo form. This prototype does not connect to the URL or read the directory.</p></div></div><div class="panel settings-card"><div class="section-kicker">MODEL CONNECTION</div><h2>Not connected</h2><p class="settings-body-copy">The audit results on this screen use synthetic sample data. No model API is configured or called.</p><div class="connection-detail-row"><span class="connection-dot-muted"></span><span>Gemma / multimodal analysis</span><span class="connection-off">Not configured</span></div><div class="connection-detail-row"><span class="connection-dot-muted"></span><span>Playwright browser runner</span><span class="connection-off">Not configured</span></div><div class="connection-detail-row"><span class="connection-dot-muted"></span><span>Patch application service</span><span class="connection-off">Not configured</span></div></div></div>
+        </section>
+
+        <section class="view-page alternate-view" id="privacy-view" aria-labelledby="privacy-title" hidden>
+          <div class="page-intro alternate-intro"><div><div class="eyebrow">WORKSPACE / TRANSPARENCY</div><h1 id="privacy-title">Privacy &amp; limitations</h1><p class="intro-copy">A clear line between this demo and a real code audit.</p></div><button class="button button-outline" type="button" data-view-jump="overview">Return to audit <span aria-hidden="true">→</span></button></div>
+          <div class="privacy-grid"><article class="panel privacy-card"><span class="privacy-icon privacy-icon-green">✓</span><div class="section-kicker">WHAT THIS PROTOTYPE DOES</div><h2>Demonstrates the review loop</h2><p>It renders seeded findings and mock evidence, lets you reveal a hint, preview a proposed diff, explicitly approve a simulated change, and run a simulated before/after verification.</p></article><article class="panel privacy-card"><span class="privacy-icon privacy-icon-amber">!</span><div class="section-kicker">WHAT IT DOES NOT DO</div><h2>No real audit is running</h2><p>No Playwright browser is launched. No screenshots are captured from your site. No AI model is called. No files are read, patched, or written. The visible localhost URL is display-only.</p></article><article class="panel privacy-card privacy-card-wide"><span class="privacy-icon privacy-icon-blue">◇</span><div class="section-kicker">DATA &amp; SAFETY</div><h2>Use synthetic data only</h2><p>Do not enter credentials, private repository content, production URLs, or personal data. In a future connected version, project paths, selected source excerpts, browser logs, DOM evidence, and screenshots may be sent to the configured model endpoint; an implementation should disclose the destination, minimize the evidence, exclude secrets by default, and keep API keys server-side.</p><p class="privacy-caveat">Automated findings can be incorrect or incomplete. A clean demo result is not a security guarantee.</p></article></div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="project-modal" hidden>
+      <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+        <div class="modal-heading"><div><div class="section-kicker">PROJECT CONFIGURATION</div><h2 id="project-modal-title">Sample project</h2></div><button class="icon-button modal-close" type="button" data-close-modal aria-label="Close project settings">×</button></div>
+        <p class="modal-intro">Update display details for this demo. No local project will be opened or contacted.</p>
+        <form id="project-form">
+          <label class="form-field">Project name<input id="project-name-input" name="projectName" maxlength="48" required value="Landing page" /></label>
+          <label class="form-field">Project directory <input id="project-path-input" name="projectPath" maxlength="120" required value="~/Projects/landing-page" /><small>Display-only path; the browser cannot access your filesystem.</small></label>
+          <label class="form-field">Local development URL<input id="project-url-input" name="projectUrl" type="url" required value="http://localhost:5173" /><small>For this prototype, only localhost or loopback addresses are accepted.</small></label>
+          <div class="form-error" id="project-form-error" role="alert" hidden></div>
+          <div class="modal-actions"><button class="button button-quiet" type="button" data-close-modal>Cancel</button><button class="button button-primary" type="submit">Save demo settings</button></div>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="patch-modal" hidden>
+      <section class="modal-card patch-modal-card" role="dialog" aria-modal="true" aria-labelledby="patch-modal-title">
+        <div class="modal-heading"><div><div class="section-kicker">PATCH REVIEW · SIMULATED</div><h2 id="patch-modal-title">Review before applying</h2></div><button class="icon-button modal-close" type="button" data-close-modal aria-label="Close patch review">×</button></div>
+        <p class="modal-intro">A minimal responsive change for the synthetic sample. Review the diff; nothing is written to disk.</p>
+        <div class="patch-file-bar"><span class="file-mini-icon">CSS</span><strong>sample-site/styles.css</strong><span>+2 / −1</span></div>
+        <div class="diff-block" aria-label="Proposed CSS diff"><div class="diff-line diff-context"><span>40</span><code>.feature-card {</code></div><div class="diff-line diff-remove"><span>41</span><code>  width: 520px;</code></div><div class="diff-line diff-add"><span>41</span><code>  width: 100%;</code></div><div class="diff-line diff-add"><span>42</span><code>  max-width: 520px;</code></div><div class="diff-line diff-context"><span>43</span><code>  border-radius: 16px;</code></div><div class="diff-line diff-context"><span>44</span><code>}</code></div></div>
+        <div class="patch-safety-note"><span class="info-ring">i</span><span><strong>Approval gate:</strong> selecting “Approve demo patch” changes only the rendered sample state in this browser session. It does not edit a project file.</span></div>
+        <div class="modal-actions patch-actions"><button class="button button-quiet" type="button" data-close-modal>Cancel</button><button class="button button-primary" type="button" id="approve-patch"><span aria-hidden="true">✓</span> Approve demo patch</button></div>
+      </section>
+    </div>
+
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <manus-content-root></manus-content-root><script>
+			var __manus_space_editor_info = {
+			spaceId : '2wcsGqX7PTn9YiHRCk5yV8',
+			patchList : [],
+			hideBadge : false,
+			sessionId : '8RafWhauR7ox2K0B4s4EiU',
+			isWebDev : true,
+			usageStatus : 'UsageStatus_Unknown',
+			};
+			var __manus__global_env = {
+				apiHost: 'https://api.manus.im',
+				host: 'https://manus.im',
+				amplitudeKey: '46ac3f9abb41dd2d17a5785e052bc6d3',
+			};
+			</script><script src="https://files.manuscdn.com/manus-space-dispatcher/spaceEditor-Be_SD1Uu.js" async></script><script
+			defer
+			data-domain="manus.space"
+			src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.revenue.tagged-events.js"
+		></script>
+		<script>
+			window.plausible =
+				window.plausible ||
+				function () {
+					(window.plausible.q = window.plausible.q || []).push(arguments);
+				};
+			plausible('custom-pageview', {
+			  props: {
+    			domain: window.location.host
+  			}
+			})
+		</script><script defer nonce="d7de8cd5-194b-470f-b692-11bb00a61cc6" src="https://manus-analytics.com/script.js" data-website-id="8114b3d8-5699-4e24-8953-76cf3fb75311"></script></body>
+</html>

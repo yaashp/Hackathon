@@ -1,0 +1,1052 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#000016" />
+    <meta name="description" content="DevSight AI — Ultra-minimal visual audit workspace inspired by precision engineering. Inspect issues, reveal root causes, stage fixes, and verify responsive telemetry." />
+    <title>DevSight AI — Precision Visual Audit Engine</title>
+    <link rel="icon" href="./devsight-mark.svg" type="image/svg+xml" />
+    
+    <!-- Google Fonts: Manrope (Body/UI), Bebas Neue & Barlow Semi Condensed (Editorial Condensed Display), Space Mono (Telemetry) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,400;0,600;0,700;0,800;1,700&family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./safety.js" defer></script>
+    <script src="./app.js" defer></script>
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DevSight AI — Visual Audit Workspace">
+    <meta property="og:description" content="See the problem. Understand the fix. Precision visual audit telemetry.">
+  </head>
+  <body class="cl-theme">
+    <!-- Subtle racing telemetry background grids -->
+    <div class="ambient-mesh" aria-hidden="true"></div>
+
+    <!-- Top Fixed Header -->
+    <header class="site-header" id="site-header">
+      <div class="header-inner">
+        <!-- Logo / Brand -->
+        <a class="brand-link" href="#hero" aria-label="DevSight AI Homepage">
+          <div class="brand-mark-wrap">
+            <svg class="brand-mark-svg" width="34" height="26" viewBox="0 0 34 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 26L7.2 0H13.6L6.4 26H0Z" fill="#e4032e"/>
+              <path d="M10.2 26L17.4 0H23.8L16.6 26H10.2Z" fill="#ffffff" fill-opacity="0.9"/>
+              <path d="M20.4 26L27.6 0H34L26.8 26H20.4Z" fill="#ffffff" fill-opacity="0.35"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">DEVSIGHT</span>
+            <span class="brand-num">16</span>
+          </div>
+        </a>
+
+        <!-- Header Controls & Chapters -->
+        <div class="header-actions">
+          <!-- Chapters Dropdown Trigger with Dual Rolling Text -->
+          <button class="hover-up chapter-dropdown-trigger" id="chapters-trigger" type="button" aria-expanded="false" aria-controls="chapters-drawer">
+            <span class="ah">
+              <span class="chapter-live-label" id="header-active-chapter">01 / Evidence</span>
+              <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+            <span class="ah2">
+              <span class="chapter-live-label" id="header-active-chapter-2">01 / Evidence</span>
+              <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </button>
+
+          <!-- Audio / Sound Synthesizer Toggle with Animated Sound Bars -->
+          <button class="hover-up sound-toggle-btn" id="sound-toggle" type="button" aria-label="Toggle interaction audio">
+            <span class="ah">
+              <span class="sound-bars" aria-hidden="true">
+                <i></i><i></i><i></i><i></i>
+              </span>
+              <span class="sound-text">Sound on</span>
+            </span>
+            <span class="ah2">
+              <span class="sound-bars" aria-hidden="true">
+                <i></i><i></i><i></i><i></i>
+              </span>
+              <span class="sound-text">Sound on</span>
+            </span>
+          </button>
+
+          <!-- Quick Run Audit Button -->
+          <div class="run-button-group">
+            <button class="button-cl button-red hover-up" type="button" id="run-audit">
+              <span class="ah">
+                <span class="btn-icon">▶</span>
+                <span id="run-audit-label">Run audit</span>
+              </span>
+              <span class="ah2">
+                <span class="btn-icon">▶</span>
+                <span id="run-audit-label-2">Run audit</span>
+              </span>
+            </button>
+            <div class="run-menu-wrap">
+              <button class="run-menu-button" id="run-menu-toggle" type="button" aria-label="More audit demo options" aria-expanded="false">•••</button>
+              <div class="run-menu" id="run-menu" hidden>
+                <div class="menu-kicker">DEMO MODES</div>
+                <button type="button" data-run-mode="complete">Complete run (Full)</button>
+                <button type="button" data-run-mode="partial">Partial bundle (Warning)</button>
+                <button type="button" data-run-mode="error">Audit error simulation</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Burger Menu Button (Morphing 2-line) -->
+          <button class="burger-btn" id="burger-toggle" type="button" aria-label="Toggle full menu" aria-expanded="false">
+            <span class="burger-bar bar-1"></span>
+            <span class="burger-bar bar-2"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Chapter Drawer / Dropdown -->
+      <nav class="chapters-drawer" id="chapters-drawer" aria-label="Chapter quick navigation" hidden>
+        <div class="chapters-grid">
+          <a class="chapter-item is-active" href="#chapter-evidence" data-chapter="evidence">
+            <span class="chap-num">01</span>
+            <div class="chap-info">
+              <strong>Browser Evidence</strong>
+              <small>Mobile 390×844 · Desktop 1440 · Console</small>
+            </div>
+            <span class="chap-arrow">→</span>
+          </a>
+          <a class="chapter-item" href="#chapter-signals" data-chapter="signals">
+            <span class="chap-num">02</span>
+            <div class="chap-info">
+              <strong>Audit Signals</strong>
+              <small>3 sources · 4 analytical perspectives</small>
+            </div>
+            <span class="chap-arrow">→</span>
+          </a>
+          <a class="chapter-item" href="#chapter-findings" data-chapter="findings">
+            <span class="chap-num">03</span>
+            <div class="chap-info">
+              <strong>Review Queue &amp; Findings</strong>
+              <small>2 issues · Socratic hint &amp; root cause</small>
+            </div>
+            <span class="chap-arrow">→</span>
+          </a>
+          <a class="chapter-item" href="#chapter-verify" data-chapter="verify">
+            <span class="chap-num">04</span>
+            <div class="chap-info">
+              <strong>Patch &amp; Verification</strong>
+              <small>Staged CSS fix · Closed loop check</small>
+            </div>
+            <span class="chap-arrow">→</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Fullscreen Minimalist Menu Overlay (Charles Leclerc Style) -->
+    <div class="full-menu-overlay" id="full-menu" hidden>
+      <div class="menu-backdrop"></div>
+      <div class="menu-content-wrap">
+        <div class="menu-top-row">
+          <div class="workspace-pill">
+            <span class="ws-dot"></span>
+            <span class="ws-meta">WORKSPACE 16 // <strong>LANDING PAGE</strong></span>
+          </div>
+          <div class="lang-selector">
+            <span class="lang-opt is-active">EN</span>
+            <span class="lang-sep">/</span>
+            <span class="lang-opt">DEV</span>
+            <span class="lang-sep">/</span>
+            <span class="lang-opt">RAW</span>
+          </div>
+        </div>
+
+        <div class="menu-body-grid">
+          <div class="menu-nav-col">
+            <nav class="editorial-nav">
+              <div class="editorial-nav-item">
+                <a class="hover-up ed-link" href="#overview" data-view="overview">
+                  <span class="ah"><span class="ed-index">01</span> AUDIT WORKSPACE</span>
+                  <span class="ah2"><span class="ed-index">01</span> AUDIT WORKSPACE</span>
+                </a>
+              </div>
+              <div class="editorial-nav-item">
+                <a class="hover-up ed-link" href="#history" data-view="history">
+                  <span class="ah"><span class="ed-index">02</span> RUN HISTORY</span>
+                  <span class="ah2"><span class="ed-index">02</span> RUN HISTORY</span>
+                </a>
+              </div>
+              <div class="editorial-nav-item">
+                <a class="hover-up ed-link" href="#project" data-view="project">
+                  <span class="ah"><span class="ed-index">03</span> PROJECT SETTINGS</span>
+                  <span class="ah2"><span class="ed-index">03</span> PROJECT SETTINGS</span>
+                </a>
+              </div>
+              <div class="editorial-nav-item">
+                <a class="hover-up ed-link" href="#privacy" data-view="privacy">
+                  <span class="ah"><span class="ed-index">04</span> PRIVACY &amp; LIMITS</span>
+                  <span class="ah2"><span class="ed-index">04</span> PRIVACY &amp; LIMITS</span>
+                </a>
+              </div>
+            </nav>
+          </div>
+
+          <div class="menu-card-col">
+            <div class="menu-featured-card">
+              <div class="mf-kicker">LATEST TELEMETRY SIGNAL</div>
+              <div class="mf-title">Mobile card overflow (styles.css:42)</div>
+              <p class="mf-desc">Fixed width 520px extends 130px past 390px mobile viewport boundaries.</p>
+              <div class="mf-status"><span class="status-dot"></span> Needs Review · 88% Confidence</div>
+              <button class="button-cl button-outline hover-up" type="button" id="menu-jump-fix">
+                <span class="ah">Inspect finding <span class="arrow-glyph">→</span></span>
+                <span class="ah2">Inspect finding <span class="arrow-glyph">→</span></span>
+              </button>
+            </div>
+
+            <div class="menu-meta-list">
+              <div class="meta-row"><span>Repository</span><code>~/Projects/landing-page</code></div>
+              <div class="meta-row"><span>Dev Server</span><code>http://localhost:5173</code></div>
+              <div class="meta-row"><span>Engine</span><code>DevSight Synthesizer v2.4</code></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-bottom-row">
+          <div class="social-links">
+            <span class="soc-label">RESOURCES //</span>
+            <a class="hover-up" href="https://github.com" target="_blank" rel="noreferrer"><span class="ah">GitHub</span><span class="ah2">GitHub</span></a>
+            <a class="hover-up" href="#privacy" data-open-privacy><span class="ah">Documentation</span><span class="ah2">Documentation</span></a>
+            <a class="hover-up" href="#project" id="menu-settings-btn"><span class="ah">Configure</span><span class="ah2">Configure</span></a>
+          </div>
+          <div class="copy-note">© DEVSIGHT AI // SCUDERIA PRECISION AUDIT</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden compatibility elements for app.js state syncing -->
+    <div hidden>
+      <div class="app-shell">
+        <span id="sidebar-project-name">Landing page</span>
+        <button class="nav-item" data-view="overview"></button>
+        <button class="nav-item" data-view="history"></button>
+        <button class="nav-item" data-view="project"></button>
+        <button class="nav-item" data-view="privacy"></button>
+        <span id="crumb-current">Audit overview</span>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="main-container" id="main-content">
+      
+      <!-- View Page: Overview (Primary Audit Workspace) -->
+      <section class="view-page is-visible" id="overview-view">
+        
+        <!-- Hero Section (Charles Leclerc Inspired Editorial Landing) -->
+        <section class="hero-section" id="hero">
+          <div class="hero-corner-skew hero-corner-tl" aria-hidden="true"></div>
+          <div class="hero-corner-skew hero-corner-br" aria-hidden="true"></div>
+          
+          <div class="hero-content">
+            <div class="hero-kicker-strip">
+              <span class="kicker-tag"><span class="red-bar"></span> 00 // WORKSPACE READY</span>
+              <span class="kicker-sep">/</span>
+              <span class="kicker-text">SYNTHETIC TELEMETRY · LOCAL PROTOTYPE</span>
+            </div>
+
+            <h1 class="hero-title" id="page-title">
+              <span class="title-line">SEE THE PROBLEM.</span>
+              <span class="title-line title-highlight">UNDERSTAND THE FIX.</span>
+            </h1>
+
+            <p class="hero-subtitle">
+              A streamlined, distraction-free visual audit workspace. From first telemetry signal to verified responsive fix.
+            </p>
+
+            <div class="hero-project-bar">
+              <div class="project-pill">
+                <span class="pill-dot"></span>
+                <span class="pill-name" id="project-name">Landing page</span>
+                <span class="pill-divider">·</span>
+                <code class="pill-path" id="project-path">~/Projects/landing-page</code>
+                <span class="pill-divider">·</span>
+                <code class="pill-url" id="local-url">http://localhost:5173</code>
+              </div>
+              <div class="hero-actions">
+                <button class="button-cl button-ghost hover-up" type="button" id="configure-project">
+                  <span class="ah">Configure project ⚙</span>
+                  <span class="ah2">Configure project ⚙</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leclerc-Style Centered Scroll Indicator -->
+          <div class="scroll-explore" aria-hidden="true">
+            <span class="scroll-label">Scroll to explore</span>
+            <div class="scroll-hairline" data-scroll-line>
+              <span class="scroll-hairline-pulse"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Global Audit Telemetry Notification & Progress -->
+        <div class="telemetry-bar-wrap">
+          <div class="audit-feedback" id="audit-feedback" role="status" aria-live="polite" hidden></div>
+          <div class="audit-progress" id="audit-progress" aria-live="polite" hidden>
+            <div class="progress-header">
+              <div class="progress-orbit"><span class="orbit-spinner"></span></div>
+              <div class="progress-copy">
+                <strong id="progress-title">Preparing demo audit…</strong>
+                <span id="progress-detail">Reading the sample page and evidence bundle</span>
+              </div>
+            </div>
+            <div class="progress-track"><span id="progress-fill"></span></div>
+          </div>
+        </div>
+
+        <!-- Chapter 01: Browser Evidence -->
+        <section class="chapter-block" id="chapter-evidence" aria-labelledby="evidence-heading">
+          <div class="chapter-heading-bar">
+            <div class="tp-skew-tab">
+              <span class="skew-tab-num">01</span>
+              <span class="skew-tab-name">BROWSER EVIDENCE</span>
+            </div>
+            <div class="chapter-status-badge">
+              <span class="badge-pulse"></span>
+              <span>SIMULATED PREVIEW</span>
+            </div>
+          </div>
+
+          <div class="evidence-wrapper tp-card-frame">
+            <!-- Evidence Mode Switcher with Skewed Tabs -->
+            <div class="evidence-toolbar">
+              <div class="evidence-tabs" role="tablist" aria-label="Evidence type">
+                <button type="button" class="evidence-tab is-active hover-up" data-evidence="mobile" role="tab" aria-selected="true">
+                  <span class="ah"><span class="tab-label">Mobile</span> <span class="tab-meta">390 × 844</span></span>
+                  <span class="ah2"><span class="tab-label">Mobile</span> <span class="tab-meta">390 × 844</span></span>
+                </button>
+                <button type="button" class="evidence-tab hover-up" data-evidence="desktop" role="tab" aria-selected="false">
+                  <span class="ah"><span class="tab-label">Desktop</span> <span class="tab-meta">1440 × 900</span></span>
+                  <span class="ah2"><span class="tab-label">Desktop</span> <span class="tab-meta">1440 × 900</span></span>
+                </button>
+                <button type="button" class="evidence-tab hover-up" data-evidence="signals" role="tab" aria-selected="false">
+                  <span class="ah"><span class="tab-label">Console &amp; DOM</span> <span class="signal-count">2</span></span>
+                  <span class="ah2"><span class="tab-label">Console &amp; DOM</span> <span class="signal-count">2</span></span>
+                </button>
+              </div>
+
+              <div class="capture-meta-pill">
+                <span class="meta-host" id="capture-url">localhost:5173</span>
+                <span class="meta-sep">/</span>
+                <span class="meta-dims" id="capture-viewport">390 × 844</span>
+                <span class="meta-state" id="capture-state-label">OVERFLOW DETECTED</span>
+              </div>
+            </div>
+
+            <!-- Stage & Frame -->
+            <div class="capture-area" id="capture-area">
+              <div class="capture-stage">
+                <div class="capture-frame is-mobile" id="capture-frame">
+                  <div class="device-notch" aria-hidden="true"><span></span></div>
+                  <div class="mock-browser-bar">
+                    <span class="mock-brand-mark"></span>
+                    <span>northstar<span class="mock-brand-dot">.</span></span>
+                    <span class="mock-menu-icon" aria-hidden="true"><i></i><i></i></span>
+                  </div>
+                  <div class="browser-viewport">
+                    <div class="mock-site">
+                      <div class="mock-site-eyebrow"><span class="mock-spark" aria-hidden="true">✳</span> THE FIELD NOTES</div>
+                      <h3>Make room<br />for better ideas.</h3>
+                      <p class="mock-description">A little inspiration for the things you’re building next.</p>
+                      <div class="mock-card-wrap">
+                        <article class="mock-card" id="mock-card">
+                          <div class="mock-card-art">
+                            <span class="art-orbit orbit-one"></span>
+                            <span class="art-orbit orbit-two"></span>
+                            <span class="art-sun"></span>
+                            <span class="art-horizon"></span>
+                            <span class="art-label">FIELD NOTE 08</span>
+                          </div>
+                          <div class="mock-card-copy">
+                            <div class="mock-card-category">DESIGN · 6 MIN READ</div>
+                            <h4>Start with the shape of the question.</h4>
+                            <p>Good work begins before the first answer. Here’s a practice for finding the edges.</p>
+                            <span class="mock-read-link">Read the note <b aria-hidden="true">↗</b></span>
+                          </div>
+                        </article>
+                      </div>
+                      <div class="mock-bottom">
+                        <span>Designed for the curious.</span>
+                        <span class="mock-bottom-dot"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="overflow-indicator" id="overflow-indicator">
+                    <span class="overflow-warn-icon">!</span>
+                    <span class="overflow-warn-text">130px beyond viewport</span>
+                  </div>
+                  <div class="device-home" aria-hidden="true"></div>
+                </div>
+
+                <div class="desktop-caption" id="desktop-caption" hidden>
+                  <span class="desktop-caption-dot"></span> Layout fits normally at desktop width (1440px)
+                </div>
+              </div>
+
+              <!-- Source snippet highlight strip -->
+              <div class="source-evidence">
+                <div class="source-file-label">
+                  <span class="file-badge">CSS</span>
+                  <span class="file-path">sample-site / styles.css</span>
+                  <span class="line-ref">: line 42</span>
+                </div>
+                <div class="source-code-display">
+                  <code id="source-snippet"><span class="code-selector">.feature-card</span> { <span class="code-property">width</span>: <span class="code-value">520px</span>; }</code>
+                </div>
+                <div class="source-status-wrap">
+                  <span class="source-status" id="source-status">
+                    <span class="source-status-dot"></span> Likely cause
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Chapter 02: Audit Signals & Perspectives -->
+        <section class="chapter-block" id="chapter-signals" aria-labelledby="signals-heading">
+          <div class="chapter-heading-bar">
+            <div class="tp-skew-tab">
+              <span class="skew-tab-num">02</span>
+              <span class="skew-tab-name">AUDIT SIGNALS</span>
+            </div>
+            <div class="chapter-status-badge">
+              <span id="signal-summary-title">3 evidence sources</span>
+            </div>
+          </div>
+
+          <div class="signals-grid">
+            <!-- Telemetry Source Cards -->
+            <div class="telemetry-card">
+              <div class="tc-top">
+                <span class="tc-icon warn-icon">!</span>
+                <span class="tc-badge status-warn">1 ISSUE</span>
+              </div>
+              <div class="tc-body">
+                <strong>Console &amp; Page Errors</strong>
+                <p id="console-summary">1 warning · 0 page errors</p>
+              </div>
+              <button class="tc-action hover-up" type="button" data-evidence-shortcut="signals">
+                <span class="ah">Inspect log ↗</span>
+                <span class="ah2">Inspect log ↗</span>
+              </button>
+            </div>
+
+            <div class="telemetry-card">
+              <div class="tc-top">
+                <span class="tc-icon info-icon">⌗</span>
+                <span class="tc-badge status-blue">1 NOTE</span>
+              </div>
+              <div class="tc-body">
+                <strong>DOM &amp; Accessibility</strong>
+                <p>6 inspected nodes · 1 missing label note</p>
+              </div>
+              <button class="tc-action hover-up" type="button" data-evidence-shortcut="signals">
+                <span class="ah">Inspect DOM ↗</span>
+                <span class="ah2">Inspect DOM ↗</span>
+              </button>
+            </div>
+
+            <div class="telemetry-card">
+              <div class="tc-top">
+                <span class="tc-icon view-icon">▧</span>
+                <span class="tc-badge status-green">2 VIEWS</span>
+              </div>
+              <div class="tc-body">
+                <strong>Viewport Evidence</strong>
+                <p>Desktop (1440px) + Mobile (390px) variants</p>
+              </div>
+              <button class="tc-action hover-up" type="button" data-evidence-shortcut="mobile">
+                <span class="ah">Compare ↗</span>
+                <span class="ah2">Compare ↗</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 4 Review Perspectives presented as racing badges -->
+          <div class="perspectives-frame tp-card-frame">
+            <div class="pf-header">
+              <div class="pf-kicker">REVIEW PERSPECTIVES // SIMULATED MULTI-ANGLE ANALYSIS</div>
+              <span class="pf-tag">ONE STRUCTURED REVIEW</span>
+            </div>
+            <div class="perspectives-chips-row">
+              <div class="p-chip">
+                <span class="p-icon">◇</span>
+                <div class="p-copy">
+                  <strong>Security Reviewer</strong>
+                  <small>Zero execution risks detected</small>
+                </div>
+              </div>
+              <div class="p-chip">
+                <span class="p-icon">⌘</span>
+                <div class="p-copy">
+                  <strong>Code Quality</strong>
+                  <small>Fixed-width antipattern identified</small>
+                </div>
+              </div>
+              <div class="p-chip">
+                <span class="p-icon">↗</span>
+                <div class="p-copy">
+                  <strong>Socratic Mentor</strong>
+                  <small>Guided hints to learn root cause</small>
+                </div>
+              </div>
+              <div class="p-chip">
+                <span class="p-icon">▧</span>
+                <div class="p-copy">
+                  <strong>Visual QA Reviewer</strong>
+                  <small>130px horizontal viewport bleed</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Chapter 03: Review Queue & Findings -->
+        <section class="chapter-block" id="chapter-findings" aria-labelledby="findings-heading">
+          <div class="chapter-heading-bar">
+            <div class="tp-skew-tab">
+              <span class="skew-tab-num">03</span>
+              <span class="skew-tab-name">REVIEW QUEUE &amp; FINDINGS</span>
+            </div>
+            <div class="finding-counter-wrap">
+              <button class="filter-btn hover-up" type="button" id="finding-filter" aria-label="Finding filter">
+                <span class="ah">All findings ⌄</span>
+                <span class="ah2">All findings ⌄</span>
+              </button>
+              <span class="finding-badge-total" id="finding-total">02</span>
+            </div>
+          </div>
+
+          <div class="findings-layout">
+            <!-- Finding Selector Column -->
+            <div class="finding-selector-list" id="finding-list" role="tablist">
+              <button class="finding-card is-selected" type="button" data-finding="overflow" aria-current="true">
+                <div class="fc-head">
+                  <span class="fc-severity severity-medium">MEDIUM</span>
+                  <span class="fc-id">DS-001</span>
+                </div>
+                <div class="fc-title">Card overflows on mobile</div>
+                <div class="fc-meta">
+                  <span>Visual layout</span>
+                  <span class="sep">·</span>
+                  <code>styles.css:42</code>
+                </div>
+                <span class="fc-arrow">→</span>
+              </button>
+
+              <button class="finding-card" type="button" data-finding="label" aria-current="false">
+                <div class="fc-head">
+                  <span class="fc-severity severity-low">LOW</span>
+                  <span class="fc-id">DS-002</span>
+                </div>
+                <div class="fc-title">Menu control needs a label</div>
+                <div class="fc-meta">
+                  <span>Accessibility</span>
+                  <span class="sep">·</span>
+                  <code>navigation.html</code>
+                </div>
+                <span class="fc-arrow">→</span>
+              </button>
+            </div>
+
+            <!-- Finding Detail Panel (Charles Leclerc Editorial Frame) -->
+            <div class="finding-detail-wrap tp-card-frame">
+              
+              <!-- Finding 1: Overflow -->
+              <div class="finding-detail-content" id="overflow-detail">
+                <div class="detail-header-row">
+                  <div>
+                    <div class="detail-kicker">DIAGNOSTIC DETAIL // DS-001</div>
+                    <h2 class="detail-title" id="detail-title">Card overflows on mobile</h2>
+                  </div>
+                  <div class="confidence-badge">
+                    <span class="confidence-num">88%</span>
+                    <span class="confidence-label">CONFIDENCE</span>
+                  </div>
+                </div>
+
+                <div class="tags-strip">
+                  <span class="d-tag tag-visual">Visual QA</span>
+                  <span class="d-tag tag-medium">Medium Severity</span>
+                  <span class="d-tag tag-status" id="finding-status-tag">
+                    <span class="status-dot"></span> Needs Review
+                  </span>
+                </div>
+
+                <div class="observation-box">
+                  <div class="obs-bar"></div>
+                  <div class="obs-copy">
+                    <strong>Observed Symptom:</strong>
+                    <p>In the mobile viewport (390px), the <code>.feature-card</code> element extends past the display border. Its right card boundary is clipped by 130px.</p>
+                  </div>
+                </div>
+
+                <div class="diagnostic-grid">
+                  <div class="diag-card">
+                    <span class="diag-label">LIKELY ROOT CAUSE</span>
+                    <p>A hardcoded rule <code>width: 520px</code> in <code>styles.css</code> forces fixed dimensions larger than the 390px viewport container.</p>
+                  </div>
+                  <div class="diag-card">
+                    <span class="diag-label">REPRODUCE IN DEMO</span>
+                    <p>Toggle to Chapter 01 (Mobile tab) and inspect the card’s right edge extending beyond the simulated screen.</p>
+                  </div>
+                </div>
+
+                <!-- Socratic Hint Card -->
+                <div class="socratic-hint-card">
+                  <div class="hint-top">
+                    <span class="hint-icon">✳</span>
+                    <span class="hint-title">SOCRATIC MENTOR QUESTION</span>
+                    <span class="hint-badge">HINT FIRST</span>
+                  </div>
+                  <p class="hint-prompt">Which CSS width rule stays identical when the viewport gets narrower, and which rule responds fluidly?</p>
+                </div>
+
+                <!-- Reveal Trigger & Content -->
+                <div class="answer-reveal" id="answer-reveal" hidden>
+                  <div class="fix-box">
+                    <div class="fix-label">RECOMMENDED SOLUTION</div>
+                    <p>Make the element fluid with <code>width: 100%</code>, then establish its desktop ceiling with <code>max-width: 520px</code>.</p>
+                  </div>
+
+                  <div class="viewpoints-box">
+                    <div class="vp-label">CONTEXTUAL VIEWPOINTS // ONE AUDIT PASS</div>
+                    <div class="vp-grid">
+                      <div class="vp-card">
+                        <strong>Security</strong>
+                        <p>No injection or remote risks found; pure styling scope.</p>
+                      </div>
+                      <div class="vp-card">
+                        <strong>Code Quality</strong>
+                        <p>Eliminating static widths ensures responsive maintainability.</p>
+                      </div>
+                      <div class="vp-card">
+                        <strong>Visual QA</strong>
+                        <p>Card now flexes within 390px mobile viewport margins.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="patch-cta-row">
+                    <button class="button-cl button-red hover-up patch-btn" type="button" id="open-patch">
+                      <span class="ah">Review proposed patch <span class="arrow-glyph">→</span></span>
+                      <span class="ah2">Review proposed patch <span class="arrow-glyph">→</span></span>
+                    </button>
+                  </div>
+                </div>
+
+                <button class="reveal-button hover-up" id="reveal-answer" type="button">
+                  <span class="ah">Reveal explanation &amp; suggested fix ↓</span>
+                  <span class="ah2">Reveal explanation &amp; suggested fix ↓</span>
+                </button>
+              </div>
+
+              <!-- Finding 2: Missing Label -->
+              <div class="finding-detail-content secondary-detail" id="label-detail" hidden>
+                <div class="detail-header-row">
+                  <div>
+                    <div class="detail-kicker">DIAGNOSTIC DETAIL // DS-002</div>
+                    <h2 class="detail-title">Menu control needs an accessible label</h2>
+                  </div>
+                  <div class="confidence-badge">
+                    <span class="confidence-num">95%</span>
+                    <span class="confidence-label">CONFIDENCE</span>
+                  </div>
+                </div>
+
+                <div class="tags-strip">
+                  <span class="d-tag tag-a11y">Accessibility</span>
+                  <span class="d-tag tag-low">Low Severity</span>
+                  <span class="d-tag tag-status"><span class="status-dot"></span> Needs Review</span>
+                </div>
+
+                <div class="observation-box">
+                  <div class="obs-bar obs-bar-blue"></div>
+                  <div class="obs-copy">
+                    <strong>Observed Symptom:</strong>
+                    <p>The sample navigation menu button has no accessible name in the synthetic DOM tree, failing WCAG 4.1.2.</p>
+                  </div>
+                </div>
+
+                <div class="diagnostic-grid">
+                  <div class="diag-card">
+                    <span class="diag-label">LIKELY ROOT CAUSE</span>
+                    <p>An icon-only button without text content or an <code>aria-label</code> attribute.</p>
+                  </div>
+                  <div class="diag-card">
+                    <span class="diag-label">REPRODUCE IN DEMO</span>
+                    <p>Inspect node <code>&lt;button&gt;</code> in the Console &amp; DOM tab under Chapter 01.</p>
+                  </div>
+                </div>
+
+                <div class="socratic-hint-card">
+                  <div class="hint-top">
+                    <span class="hint-icon">✳</span>
+                    <span class="hint-title">SOCRATIC MENTOR QUESTION</span>
+                    <span class="hint-badge">HINT FIRST</span>
+                  </div>
+                  <p class="hint-prompt">If a screen reader user navigates to this icon control, what words would their assistive tech speak aloud?</p>
+                </div>
+
+                <div class="answer-reveal" id="label-answer" hidden>
+                  <div class="fix-box">
+                    <div class="fix-label">RECOMMENDED FIX</div>
+                    <p>Add <code>aria-label="Open navigation menu"</code> to the button element.</p>
+                  </div>
+                </div>
+
+                <button class="reveal-button hover-up" id="reveal-label-answer" type="button">
+                  <span class="ah">Reveal explanation &amp; suggested fix ↓</span>
+                  <span class="ah2">Reveal explanation &amp; suggested fix ↓</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- Chapter 04: Patch Verification & Closed Loop -->
+        <section class="chapter-block" id="chapter-verify" aria-labelledby="verification-heading">
+          <div class="chapter-heading-bar">
+            <div class="tp-skew-tab">
+              <span class="skew-tab-num">04</span>
+              <span class="skew-tab-name">PATCH &amp; VERIFICATION</span>
+            </div>
+            <div class="chapter-status-badge">
+              <span>CLOSED LOOP TELEMETRY</span>
+            </div>
+          </div>
+
+          <div class="verification-wrapper tp-card-frame" id="verification-panel">
+            <div class="verify-header-flex">
+              <div>
+                <div class="section-kicker">04 // VERIFICATION LOOP</div>
+                <h2 id="verification-heading">Close the Loop</h2>
+                <p id="verification-copy">The patch is staged in the demo. Run the comparative telemetry verification check to confirm mobile responsiveness.</p>
+              </div>
+              <button class="button-cl button-red hover-up" type="button" id="verify-fix">
+                <span class="ah"><span class="btn-icon">↻</span><span id="verify-label">Re-run verification</span></span>
+                <span class="ah2"><span class="btn-icon">↻</span><span id="verify-label-2">Re-run verification</span></span>
+              </button>
+            </div>
+
+            <!-- Before & After Comparison Cards -->
+            <div class="before-after" id="before-after">
+              <div class="compare-card">
+                <div class="compare-heading">
+                  <span><i class="compare-dot dot-before"></i>BEFORE</span>
+                  <span class="compare-spec">390 × 844 · Static CSS</span>
+                </div>
+                <div class="compare-viewport compare-overflow">
+                  <div class="compare-card-art"></div>
+                  <div class="compare-lines"><b></b><i></i><i></i></div>
+                  <span class="compare-overflow-mark">CLIPPED // 520px</span>
+                </div>
+                <p class="compare-caption">Fixed width card bleeds past the 390px viewport boundary.</p>
+              </div>
+
+              <div class="compare-arrow" aria-hidden="true">→</div>
+
+              <div class="compare-card">
+                <div class="compare-heading">
+                  <span><i class="compare-dot dot-after"></i>AFTER</span>
+                  <span class="compare-spec" id="after-state">Pending rerun</span>
+                </div>
+                <div id="compare-after" class="compare-viewport compare-after">
+                  <div class="compare-card-art"></div>
+                  <div class="compare-lines"><b></b><i></i><i></i></div>
+                  <span class="compare-fit-mark" id="compare-fit-mark">AWAITING CHECK</span>
+                </div>
+                <p class="compare-caption" id="after-caption">Awaiting synthetic verification run.</p>
+              </div>
+            </div>
+
+            <div class="verification-result" id="verification-result" role="status" hidden>
+              <span class="verification-check">✓</span>
+              <div>
+                <strong>Issue verified resolved in demo.</strong>
+                <span>The fluid responsive rule fits inside the 390px mobile viewport without clipping.</span>
+              </div>
+              <span class="verification-sim-tag">VERIFIED TELEMETRY</span>
+            </div>
+          </div>
+        </section>
+
+      </section>
+
+      <!-- View Page: Run History -->
+      <section class="view-page alternate-view" id="history-view" aria-labelledby="history-title" hidden>
+        <div class="alt-page-intro">
+          <div>
+            <div class="eyebrow">TELEMETRY ARCHIVE // 05</div>
+            <h1 id="history-title">Run History</h1>
+            <p class="alt-copy">A chronological log of simulated audit passes for this workspace.</p>
+          </div>
+          <button class="button-cl button-ghost hover-up" type="button" data-view-jump="overview">
+            <span class="ah">Back to audit →</span>
+            <span class="ah2">Back to audit →</span>
+          </button>
+        </div>
+
+        <div class="history-panel tp-card-frame">
+          <div class="history-panel-heading">
+            <div class="section-kicker">SYNTHETIC RUN LOGS</div>
+            <span class="simulated-badge">DEMO DATA</span>
+          </div>
+          
+          <div class="history-row">
+            <span class="history-icon history-icon-green">✓</span>
+            <div class="h-info">
+              <strong>Responsive fix verified</strong>
+              <span>Sample landing page · 390×844 Mobile Viewport</span>
+            </div>
+            <span class="history-result history-result-pending" id="history-result">Not run</span>
+            <time>Just now</time>
+          </div>
+
+          <div class="history-row">
+            <span class="history-icon history-icon-amber">!</span>
+            <div class="h-info">
+              <strong>Mobile overflow detected</strong>
+              <span>Sample landing page · 2 findings identified</span>
+            </div>
+            <span class="history-result">Synthetic</span>
+            <time>Demo sample</time>
+          </div>
+
+          <div class="history-row">
+            <span class="history-icon history-icon-blue">⌁</span>
+            <div class="h-info">
+              <strong>Workspace connected</strong>
+              <span>Local URL registered for synthetic telemetry preview</span>
+            </div>
+            <span class="history-result">Ready</span>
+            <time>Initial state</time>
+          </div>
+        </div>
+      </section>
+
+      <!-- View Page: Project Settings -->
+      <section class="view-page alternate-view" id="project-view" aria-labelledby="project-settings-title" hidden>
+        <div class="alt-page-intro">
+          <div>
+            <div class="eyebrow">WORKSPACE CONFIGURATION // 06</div>
+            <h1 id="project-settings-title">Project Settings</h1>
+            <p class="alt-copy">Manage the simulated local workspace parameters.</p>
+          </div>
+          <button class="button-cl button-red hover-up" type="button" id="settings-configure">
+            <span class="ah">Edit details →</span>
+            <span class="ah2">Edit details →</span>
+          </button>
+        </div>
+
+        <div class="settings-grid">
+          <div class="settings-card tp-card-frame">
+            <div class="section-kicker">ACTIVE REPOSITORY</div>
+            <h2 id="settings-project-name">Landing page</h2>
+            <div class="settings-value">
+              <span>Project directory</span>
+              <code id="settings-project-path">~/Projects/landing-page</code>
+            </div>
+            <div class="settings-value">
+              <span>Local dev URL</span>
+              <code id="settings-local-url">http://localhost:5173</code>
+            </div>
+            <div class="settings-value">
+              <span>Detected stack</span>
+              <code>HTML5 · Vanilla CSS · JavaScript ES6</code>
+            </div>
+          </div>
+
+          <div class="settings-card tp-card-frame">
+            <div class="section-kicker">TELEMETRY SERVICES</div>
+            <h2>Engine Pipeline</h2>
+            <p class="settings-body-copy">The audit simulations use synthetic local telemetry. No external model API is contacted.</p>
+            <div class="connection-detail-row">
+              <span class="connection-dot-muted"></span>
+              <span>Visual QA Engine</span>
+              <span class="connection-off">Simulated</span>
+            </div>
+            <div class="connection-detail-row">
+              <span class="connection-dot-muted"></span>
+              <span>Headless Runner</span>
+              <span class="connection-off">Mocked</span>
+            </div>
+            <div class="connection-detail-row">
+              <span class="connection-dot-muted"></span>
+              <span>Patch Stager</span>
+              <span class="connection-off">Active (Local)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- View Page: Privacy & Limits -->
+      <section class="view-page alternate-view" id="privacy-view" aria-labelledby="privacy-title" hidden>
+        <div class="alt-page-intro">
+          <div>
+            <div class="eyebrow">SAFETY &amp; TRANSPARENCY // 07</div>
+            <h1 id="privacy-title">Privacy &amp; Limitations</h1>
+            <p class="alt-copy">Clear boundaries between this prototype and a production audit pipeline.</p>
+          </div>
+          <button class="button-cl button-ghost hover-up" type="button" data-view-jump="overview">
+            <span class="ah">Return to audit →</span>
+            <span class="ah2">Return to audit →</span>
+          </button>
+        </div>
+
+        <div class="privacy-grid">
+          <article class="privacy-card tp-card-frame">
+            <span class="privacy-icon privacy-icon-green">✓</span>
+            <div class="section-kicker">WHAT THIS PROTOTYPE DEMONSTRATES</div>
+            <h2>The Complete Review Loop</h2>
+            <p>Renders seeded visual issues, reveals socratic root causes, provides staged CSS diff reviews, and simulates closed-loop before/after verification.</p>
+          </article>
+
+          <article class="privacy-card tp-card-frame">
+            <span class="privacy-icon privacy-icon-amber">!</span>
+            <div class="section-kicker">SAFETY BOUNDARIES</div>
+            <h2>No Files Are Modified On Disk</h2>
+            <p>No headless browsers are launched externally. No real codebase files are overwritten. Staging and verification occur purely in browser memory.</p>
+          </article>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Floating Maneuver Dock (Charles Leclerc Minimal Bottom Navigation) -->
+    <nav class="floating-dock" aria-label="Chapter quick maneuver dock">
+      <div class="dock-inner">
+        <a class="dock-item is-active" href="#chapter-evidence" data-dock="evidence">
+          <span class="dock-num">01</span>
+          <span class="dock-label">EVIDENCE</span>
+        </a>
+        <span class="dock-divider"></span>
+        <a class="dock-item" href="#chapter-signals" data-dock="signals">
+          <span class="dock-num">02</span>
+          <span class="dock-label">SIGNALS</span>
+        </a>
+        <span class="dock-divider"></span>
+        <a class="dock-item" href="#chapter-findings" data-dock="findings">
+          <span class="dock-num">03</span>
+          <span class="dock-label">FINDINGS</span>
+        </a>
+        <span class="dock-divider"></span>
+        <a class="dock-item" href="#chapter-verify" data-dock="verify">
+          <span class="dock-num">04</span>
+          <span class="dock-label">VERIFY</span>
+        </a>
+        <span class="dock-divider"></span>
+        <button class="dock-top-btn" id="dock-to-top" type="button" aria-label="Scroll to top">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Project Modal (Configuration) -->
+    <div class="modal-backdrop" id="project-modal" hidden>
+      <section class="modal-card tp-card-frame" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+        <div class="modal-heading">
+          <div>
+            <div class="section-kicker">PROJECT CONFIGURATION // 01</div>
+            <h2 id="project-modal-title">Workspace Details</h2>
+          </div>
+          <button class="modal-close" type="button" data-close-modal aria-label="Close project settings">×</button>
+        </div>
+        <p class="modal-intro">Update display details for this demo. No local project files will be opened or altered.</p>
+        <form id="project-form">
+          <label class="form-field">
+            <span>Project Name</span>
+            <input id="project-name-input" name="projectName" maxlength="48" required value="Landing page" />
+          </label>
+          <label class="form-field">
+            <span>Project Directory</span>
+            <input id="project-path-input" name="projectPath" maxlength="120" required value="~/Projects/landing-page" />
+            <small>Display-only path for simulation context.</small>
+          </label>
+          <label class="form-field">
+            <span>Local Development URL</span>
+            <input id="project-url-input" name="projectUrl" type="url" required value="http://localhost:5173" />
+            <small>Accepts localhost or loopback addresses.</small>
+          </label>
+          <div class="form-error" id="project-form-error" role="alert" hidden></div>
+          <div class="modal-actions">
+            <button class="button-cl button-ghost" type="button" data-close-modal>Cancel</button>
+            <button class="button-cl button-red hover-up" type="submit">
+              <span class="ah">Save Settings</span>
+              <span class="ah2">Save Settings</span>
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <!-- Patch Review Modal -->
+    <div class="modal-backdrop" id="patch-modal" hidden>
+      <section class="modal-card patch-modal-card tp-card-frame" role="dialog" aria-modal="true" aria-labelledby="patch-modal-title">
+        <div class="modal-heading">
+          <div>
+            <div class="section-kicker">PATCH STAGING // DS-001</div>
+            <h2 id="patch-modal-title">Review Proposed Fix</h2>
+          </div>
+          <button class="modal-close" type="button" data-close-modal aria-label="Close patch review">×</button>
+        </div>
+        <p class="modal-intro">A minimal responsive CSS rule staged for the sample card. Review the syntax diff below.</p>
+        <div class="patch-file-bar">
+          <span class="file-badge">CSS</span>
+          <strong>sample-site / styles.css</strong>
+          <span class="diff-counts">+2 / −1</span>
+        </div>
+        <div class="diff-block" aria-label="Proposed CSS diff">
+          <div class="diff-line diff-context"><span>40</span><code>.feature-card {</code></div>
+          <div class="diff-line diff-remove"><span>41</span><code>  width: 520px;</code></div>
+          <div class="diff-line diff-add"><span>41</span><code>  width: 100%;</code></div>
+          <div class="diff-line diff-add"><span>42</span><code>  max-width: 520px;</code></div>
+          <div class="diff-line diff-context"><span>43</span><code>  border-radius: 16px;</code></div>
+          <div class="diff-line diff-context"><span>44</span><code>}</code></div>
+        </div>
+        <div class="patch-safety-note">
+          <span class="note-icon">i</span>
+          <span><strong>Approval Gate:</strong> Approving this patch stages the responsive CSS in the simulated browser session. It does not overwrite files on disk.</span>
+        </div>
+        <div class="modal-actions patch-actions">
+          <button class="button-cl button-ghost" type="button" data-close-modal>Cancel</button>
+          <button class="button-cl button-red hover-up" type="button" id="approve-patch">
+            <span class="ah">✓ Approve Demo Patch</span>
+            <span class="ah2">✓ Approve Demo Patch</span>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Toast Notification Region -->
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Subtle Charles Leclerc Skew Mask at Page Bottom -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <span class="f-dot"></span>
+          <span>DEVSIGHT AI // PRECISION AUDIT WORKSPACE</span>
+        </div>
+        <div class="footer-right">
+          <button class="text-link hover-up" type="button" data-open-privacy>
+            <span class="ah">Privacy &amp; Limitations ↗</span>
+            <span class="ah2">Privacy &amp; Limitations ↗</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

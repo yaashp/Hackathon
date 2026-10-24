@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">DevSight AI mark</title>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="#17282d"/>
+  <rect x="8" y="8" width="48" height="48" rx="13" fill="#213a3c" stroke="#45645e" stroke-width="1.5"/>
+  <path d="M20 43V31h5v12zm9 0V22h5v21zm9 0V27h5v16z" fill="#91d1c3"/>
+</svg>

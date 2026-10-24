@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+Disallow: /api/*
+Sitemap: https://devsight-2wcsgqx7.manus.space/sitemap.xml
